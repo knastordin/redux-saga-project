@@ -5,7 +5,7 @@ export default ({ post, id }) => {
         <div className="card">
             <div className="card-body">
                 <h5 className="card-title">
-                    Title here {id}
+                    {post.title}
                 </h5>
             </div>
         </div>
