@@ -5,11 +5,30 @@ export default class PostForm extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {};
+        this.state = {
+            title: ''
+        };
     }
 
     submitHandler = event => {
         event.preventDefault();
+
+        const { title } = this.state
+        const newPost = {
+            title, id: Date.now().toString()
+        }
+
+        console.log(newPost)
+        this.setState({ title: '' })
+    }
+
+    changeInputHandler = event => {
+        event.persist()
+        this.setState(prev => ({
+            ...prev, ...{
+                [event.target.name]: event.target.value
+            }
+        }))
     }
 
     render() {
@@ -17,7 +36,13 @@ export default class PostForm extends Component {
             <form onSubmit={this.submitHandler}>
                 <div className="form-group">
                     <label htmlFor="title">Title</label>
-                    <input type="text" className="form-control" id="title" />
+                    <input type="text"
+                        className="form-control"
+                        id="title"
+                        value={this.state.title}
+                        name="title"
+                        onChange={this.changeInputHandler}
+                    />
                 </div>
                 <button className="btn btn-success" type="submit">Create</button>
             </form>
